@@ -13,7 +13,7 @@ public class AdivinanzaDF {
         int numeroAleatorio;
         Random nAleatorio = new Random();
 
-        numeroAleatorio = nAleatorio.nextInt(n1) + n2;
+        numeroAleatorio = nAleatorio.nextInt(n2) + n1;
         return numeroAleatorio;
     }
 
