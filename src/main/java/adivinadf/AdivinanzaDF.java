@@ -29,6 +29,11 @@ public class AdivinanzaDF {
                     return true;
                 } else {
                     System.out.println("Ese no es");
+                    if (numeroDelUsuario < numeroPorAdivinar) {
+                        System.out.println("El numero que buscas es mayor que " + numeroDelUsuario);
+                    } else {
+                        System.out.println("El numero que buscas es menor que " + numeroDelUsuario);
+                    }
                     System.out.println("Te quedan " + vidas + " vidas");
                 }
             } catch (InputMismatchException ime) {
