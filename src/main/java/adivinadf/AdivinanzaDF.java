@@ -17,10 +17,32 @@ public class AdivinanzaDF {
         return numeroAleatorio;
     }
 
+    private static boolean aJugar(int numeroPorAdivinar) {
+        Scanner teclado = new Scanner(System.in);
+        for (int vidas = 2; vidas >= 0; vidas--) {
+            try {
+                System.out.println("¿Que numero crees que es?");
+                int numeroDelUsuario = teclado.nextInt();
+
+                if (numeroDelUsuario == numeroPorAdivinar) {
+                    System.out.println("LO HAS ADIVINADO");
+                    return true;
+                } else {
+                    System.out.println("Ese no es");
+                    System.out.println("Te quedan " + vidas + " vidas");
+                }
+            } catch (InputMismatchException ime) {
+                System.out.println("Eso no es un numero...");
+                teclado.nextLine();
+                vidas++;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int numero1 = 0, numero2 = 0;
-        boolean ganador = false;
-        int numeroDelUsuario;
+        boolean ganador;
         boolean repetirDatos = true;
 
         Scanner teclado = new Scanner(System.in);
@@ -51,25 +73,8 @@ public class AdivinanzaDF {
         System.out.println("Escojiendo...");
         int numeroPorAdivinar = adivinar(numero1, numero2);
 
-        for (int vidas = 2; vidas >= 0; vidas--) {
-            try {
-                System.out.println("¿Que numero crees que es?");
-                numeroDelUsuario = teclado.nextInt();
+        ganador = aJugar(numeroPorAdivinar);
 
-                if (numeroDelUsuario == numeroPorAdivinar) {
-                    System.out.println("LO HAS ADIVINADO");
-                    ganador = true;
-                    break;
-                } else {
-                    System.out.println("Ese no es");
-                    System.out.println("Te quedan " + vidas + " vidas");
-                }
-            } catch (InputMismatchException ime) {
-                System.out.println("Eso no es un numero...");
-                teclado.nextLine();
-                vidas++;
-            }
-        }
         if (ganador == false) {
             System.out.println("No lo has logrado, el numero era: " + numeroPorAdivinar);
         }
