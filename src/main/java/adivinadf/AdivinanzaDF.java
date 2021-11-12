@@ -1,5 +1,6 @@
 package adivinadf;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,18 +18,36 @@ public class AdivinanzaDF {
     }
 
     public static void main(String[] args) {
-        int numero1, numero2;
+        int numero1 = 0, numero2 = 0;
+        boolean repetirDatos = true;
 
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("Comienza la adivinanza");
         System.out.println("Buscaras un numero aleatorio entre lo que tu decidas");
+        do {
+            try {
+                System.out.println("Escoje el numero minimo");
+                numero1 = teclado.nextInt();
 
-        System.out.println("Escoje el numero 1");
-        numero1 = teclado.nextInt();
+                System.out.println("Escoje el numero maximo");
+                numero2 = teclado.nextInt();
 
-        System.out.println("Escoje el numero 2");
-        numero2 = teclado.nextInt();
+                if (numero1 > numero2) {
+                    System.out.println("El numero minimo no puede ser mas pequeño que el maximo");
+                } else {
+                    repetirDatos = false;
+                }
+
+            } catch (InputMismatchException ime) {
+                System.out.println("No se ha introducido un numero");
+                teclado.nextLine();
+            }
+
+        } while (repetirDatos);
+
+        System.out.println("Escojiendo...");
+        int numeroPorAdivinar = adivinar(numero1, numero2);
         
     }
 
