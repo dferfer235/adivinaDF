@@ -52,19 +52,25 @@ public class AdivinanzaDF {
         int numeroPorAdivinar = adivinar(numero1, numero2);
 
         for (int vidas = 2; vidas >= 0; vidas--) {
-            System.out.println("¿Que numero crees que es?");
-            numeroDelUsuario = teclado.nextInt();
+            try {
+                System.out.println("¿Que numero crees que es?");
+                numeroDelUsuario = teclado.nextInt();
 
-            if (numeroDelUsuario == numeroPorAdivinar) {
-                System.out.println("LO HAS ADIVINADO");               
-                ganador = true;
-                break;
-            } else {
-                System.out.println("Ese no es");
-                System.out.println("Te quedan " + vidas + " vidas");
+                if (numeroDelUsuario == numeroPorAdivinar) {
+                    System.out.println("LO HAS ADIVINADO");
+                    ganador = true;
+                    break;
+                } else {
+                    System.out.println("Ese no es");
+                    System.out.println("Te quedan " + vidas + " vidas");
+                }
+            } catch (InputMismatchException ime) {
+                System.out.println("Eso no es un numero...");
+                teclado.nextLine();
+                vidas++;
             }
         }
-        if (ganador==false) {
+        if (ganador == false) {
             System.out.println("No lo has logrado, el numero era: " + numeroPorAdivinar);
         }
     }
